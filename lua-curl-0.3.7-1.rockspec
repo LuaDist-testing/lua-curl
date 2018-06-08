@@ -1,17 +1,17 @@
 -- This file was automatically generated for the LuaDist project.
 
 package = "lua-curl"
-version = "0.3.6-1"
+version = "0.3.7-1"
 
 -- LuaDist source
 source = {
-  tag = "0.3.6-1",
+  tag = "0.3.7-1",
   url = "git://github.com/LuaDist-testing/lua-curl.git"
 }
 -- Original source
 -- source = {
---   url = "https://github.com/Lua-cURL/Lua-cURLv3/archive/v0.3.6.zip",
---   dir = "Lua-cURLv3-0.3.6",
+--   url = "https://github.com/Lua-cURL/Lua-cURLv3/archive/v0.3.7.zip",
+--   dir = "Lua-cURLv3-0.3.7",
 -- }
 
 description = {

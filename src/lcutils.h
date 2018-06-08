@@ -28,8 +28,13 @@
 #define LCURL_MAKE_VERSION(MIN, MAJ, PAT) ((MIN<<16) + (MAJ<<8) + PAT)
 #define LCURL_CURL_VER_GE(MIN, MAJ, PAT) (LIBCURL_VERSION_NUM >= LCURL_MAKE_VERSION(MIN, MAJ, PAT))
 
-//! @fixme on mingw32 (gcc 4.8.1) this does not work
-#define LCURL_STATIC_ASSERT(A) {(void)(int(*)[(A)?1:0])0;}
+#define LCURL_CONCAT_STATIC_ASSERT_IMPL_(x, y) LCURL_CONCAT1_STATIC_ASSERT_IMPL_ (x, y)
+#define LCURL_CONCAT1_STATIC_ASSERT_IMPL_(x, y) x##y
+#define LCURL_STATIC_ASSERT(expr) typedef char LCURL_CONCAT_STATIC_ASSERT_IMPL_(static_assert_failed_at_line_, __LINE__) [(expr) ? 1 : -1]
+
+#define LCURL_ASSERT_SAME_SIZE(a, b) LCURL_STATIC_ASSERT( sizeof(a) == sizeof(b) )
+#define LCURL_ASSERT_SAME_OFFSET(a, am, b, bm) LCURL_STATIC_ASSERT( (offsetof(a,am)) == (offsetof(b,bm)) )
+#define LCURL_ASSERT_SAME_FIELD_SIZE(a, am, b, bm) LCURL_ASSERT_SAME_SIZE(((a*)0)->am, ((b*)0)->bm)
 
 typedef struct lcurl_const_tag{
   const char *name;
@@ -85,5 +90,9 @@ int lcurl_utils_apply_options(lua_State *L, int opt, int obj, int do_close,
                               );
 
 void lcurl_stack_dump (lua_State *L);
+
+curl_socket_t lcurl_opt_os_socket(lua_State *L, int idx, curl_socket_t def);
+
+void lcurl_push_os_socket(lua_State *L, curl_socket_t fd);
 
 #endif
