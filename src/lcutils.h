@@ -13,6 +13,18 @@
 
 #include "lcurl.h"
 
+#if defined(_MSC_VER) || defined(__cplusplus)
+#  define LCURL_CC_SUPPORT_FORWARD_TYPEDEF 1
+#elif defined(__STDC_VERSION__)
+#  if __STDC_VERSION__ >= 201112
+#    define LCURL_CC_SUPPORT_FORWARD_TYPEDEF 1
+#  endif
+#endif
+
+#ifndef LCURL_CC_SUPPORT_FORWARD_TYPEDEF
+#  define LCURL_CC_SUPPORT_FORWARD_TYPEDEF 0
+#endif
+
 #define LCURL_MAKE_VERSION(MIN, MAJ, PAT) ((MIN<<16) + (MAJ<<8) + PAT)
 #define LCURL_CURL_VER_GE(MIN, MAJ, PAT) (LIBCURL_VERSION_NUM >= LCURL_MAKE_VERSION(MIN, MAJ, PAT))
 
@@ -71,4 +83,7 @@ int lcurl_util_pcall_method(lua_State *L, const char *name, int nargs, int nresu
 int lcurl_utils_apply_options(lua_State *L, int opt, int obj, int do_close,
                               int error_mode, int error_type, int error_code
                               );
+
+void lcurl_stack_dump (lua_State *L);
+
 #endif

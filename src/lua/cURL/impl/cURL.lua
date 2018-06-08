@@ -10,7 +10,7 @@
 
 local module_info = {
   _NAME      = "Lua-cURL";
-  _VERSION   = "0.3.5";
+  _VERSION   = "0.3.6";
   _LICENSE   = "MIT";
   _COPYRIGHT = "Copyright (c) 2014-2016 Alexey Melnichuk";
 }
@@ -360,6 +360,7 @@ Easy.setopt_proxytype = wrap_setopt_flags("proxytype", {
   ["SOCKS5"          ] = curl.PROXY_SOCKS5;
   ["SOCKS4A"         ] = curl.PROXY_SOCKS4A;
   ["SOCKS5_HOSTNAME" ] = curl.PROXY_SOCKS5_HOSTNAME;
+  ["HTTPS"           ] = curl.PROXY_HTTPS;
 })
 
 Easy.setopt_httpauth  = wrap_setopt_flags("httpauth", {
@@ -660,7 +661,7 @@ local setopt_socketfunction = wrap_function("setopt_socketfunction")
 function Multi:setopt_socketfunction(...)
   local cb = wrap_callback(...)
 
-  return setopt_socketfunction(wrap_socketfunction(self, cb))
+  return setopt_socketfunction(self, wrap_socketfunction(self, cb))
 end
 
 local setopt = wrap_function("setopt")
@@ -680,7 +681,7 @@ function Multi:setopt(k, v)
   end
 
   if k == curl.OPT_SOCKETFUNCTION then
-    return self:setopt_httppost(wrap_socketfunction(v))
+    return self:setopt_socketfunction(v)
   end
 
   return setopt(self, k, v)

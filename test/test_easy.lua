@@ -668,9 +668,9 @@ end
 
 local _ENV = TEST_CASE'read_callback'        if ENABLE then
 
-local uname = upath:normolize(path.fullpath(fname))
+local uname = upath:normalize(path.fullpath(fname))
 
-local url   = "FILE://" .. uname
+local url   = "FILE:///" .. uname
 
 local c
 
@@ -885,7 +885,7 @@ function test_unset()
   gc_collect()
   assert(pfrom.value)
 
-  e:unsetopt_httppost()
+  assert_equal(e, e:unsetopt_httppost())
 
   gc_collect()
   assert(not pfrom.value)
@@ -902,7 +902,7 @@ function test_reset()
   gc_collect()
   assert(pfrom.value)
 
-  e:reset()
+  assert_equal(e, e:reset())
 
   gc_collect()
   assert(not pfrom.value)

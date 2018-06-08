@@ -175,9 +175,11 @@ on_curl_timeout = function(ms)
   -- calls by curl --
   trace("CURL::TIMEOUT", ms)
 
-  if ms <= 0 then ms = 1 end
+  if not timer:active() then
+    if ms <= 0 then ms = 1 end
 
-  timer:start(ms, 0, on_libuv_timeout)
+    timer:start(ms, 0, on_libuv_timeout)
+  end
 end
 
 on_curl_action = function(easy, fd, action)
@@ -228,7 +230,8 @@ local curl_check_multi_info = function()
 
     if ok then on_end(easy, nil, done_url) else on_end(easy, err, done_url) end
 
-    easy:reset().data = nil
+    easy:reset()
+    easy.data = nil
     qfree:push(easy)
   end
 
