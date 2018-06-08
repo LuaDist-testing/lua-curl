@@ -18,6 +18,9 @@ FLG_ENTRY(AUTH_ONLY                       )
 #endif
 FLG_ENTRY(AUTH_ANY                        )
 FLG_ENTRY(AUTH_ANYSAFE                    )
+#if LCURL_CURL_VER_GE(7,55,0)
+FLG_ENTRY(AUTH_GSSAPI                     )
+#endif
 
 #ifdef CURLSSH_AUTH_ANY
 FLG_ENTRY(SSH_AUTH_ANY                    )
@@ -33,6 +36,9 @@ FLG_ENTRY(SSH_AUTH_PASSWORD               )
 #endif
 #ifdef CURLSSH_AUTH_HOST
 FLG_ENTRY(SSH_AUTH_HOST                   )
+#endif
+#ifdef CURLSSH_AUTH_GSSAPI
+FLG_ENTRY(SSH_AUTH_GSSAPI                 )
 #endif
 #ifdef CURLSSH_AUTH_KEYBOARD
 FLG_ENTRY(SSH_AUTH_KEYBOARD               )
