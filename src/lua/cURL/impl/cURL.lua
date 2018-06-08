@@ -10,7 +10,7 @@
 
 local module_info = {
   _NAME      = "Lua-cURL";
-  _VERSION   = "0.3.4";
+  _VERSION   = "0.3.5";
   _LICENSE   = "MIT";
   _COPYRIGHT = "Copyright (c) 2014-2016 Alexey Melnichuk";
 }
@@ -592,7 +592,9 @@ function Multi:add_handle(e)
   assert(self._easy.n >= 0)
 
   local h = e:handle()
-  if self._easy[h] then return self end
+  if self._easy[h] then
+    return nil, curl.error(curl.ERROR_MULTI, curl.E_MULTI_ADDED_ALREADY or curl.E_MULTI_BAD_EASY_HANDLE)
+  end
 
   local ok, err = add_handle(self, h)
   if not ok then return nil, err end

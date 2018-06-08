@@ -238,6 +238,20 @@ OPT_ENTRY( ssl_options,             SSL_OPTIONS,             LNG, 0,            
 OPT_ENTRY( ssl_sessionid_cache,     SSL_SESSIONID_CACHE,     LNG, 0,                  1 )
 OPT_ENTRY( ssl_verifyhost,          SSL_VERIFYHOST,          LNG, 0,                  2 )
 OPT_ENTRY( ssl_verifypeer,          SSL_VERIFYPEER,          LNG, 0,                  1 )
+OPT_ENTRY( keypasswd,               KEYPASSWD,               STR, LCURL_STORE_STRING, LCURL_DEFAULT_VALUE )
+
+#if LCURL_CURL_VER_GE(7,20,0)
+OPT_ENTRY( rtsp_client_cseq,        RTSP_CLIENT_CSEQ,        LNG, 0,                  LCURL_DEFAULT_VALUE )
+OPT_ENTRY( rtsp_request,            RTSP_REQUEST,            LNG, 0,                  LCURL_DEFAULT_VALUE )
+OPT_ENTRY( rtsp_server_cseq,        RTSP_SERVER_CSEQ,        LNG, 0,                  LCURL_DEFAULT_VALUE )
+OPT_ENTRY( rtsp_session_id,         RTSP_SESSION_ID,         STR, LCURL_STORE_STRING, LCURL_DEFAULT_VALUE )
+OPT_ENTRY( rtsp_stream_uri,         RTSP_STREAM_URI,         STR, LCURL_STORE_STRING, LCURL_DEFAULT_VALUE )
+OPT_ENTRY( rtsp_transport,          RTSP_TRANSPORT,          STR, LCURL_STORE_STRING, LCURL_DEFAULT_VALUE )
+#endif
+
+#if LCURL_CURL_VER_GE(7,22,0)
+OPT_ENTRY( gssapi_delegation,       GSSAPI_DELEGATION,        LNG, 0,                  CURLGSSAPI_DELEGATION_NONE )
+#endif 
 
 FLG_ENTRY( SSLVERSION_DEFAULT )
 FLG_ENTRY( SSLVERSION_TLSv1   )
@@ -265,6 +279,9 @@ FLG_ENTRY( HTTP_VERSION_2     )
 #if LCURL_CURL_VER_GE(7,47,0)
 FLG_ENTRY( HTTP_VERSION_2TLS  )
 #endif
+#if LCURL_CURL_VER_GE(7,49,0)
+FLG_ENTRY( HTTP_VERSION_2_PRIOR_KNOWLEDGE )
+#endif
 
 FLG_ENTRY( READFUNC_PAUSE     ) /*7.18.0*/
 FLG_ENTRY( WRITEFUNC_PAUSE    ) /*7.18.0*/
@@ -283,6 +300,20 @@ FLG_ENTRY( CSELECT_OUT        ) /*7.16.3*/
 FLG_ENTRY( IPRESOLVE_WHATEVER ) /*7.10.8*/
 FLG_ENTRY( IPRESOLVE_V4       ) /*7.10.8*/
 FLG_ENTRY( IPRESOLVE_V6       ) /*7.10.8*/
+
+#if LCURL_CURL_VER_GE(7,20,0)
+FLG_ENTRY( RTSPREQ_OPTIONS       )
+FLG_ENTRY( RTSPREQ_DESCRIBE      )
+FLG_ENTRY( RTSPREQ_ANNOUNCE      )
+FLG_ENTRY( RTSPREQ_SETUP         )
+FLG_ENTRY( RTSPREQ_PLAY          )
+FLG_ENTRY( RTSPREQ_PAUSE         )
+FLG_ENTRY( RTSPREQ_TEARDOWN      )
+FLG_ENTRY( RTSPREQ_GET_PARAMETER )
+FLG_ENTRY( RTSPREQ_SET_PARAMETER )
+FLG_ENTRY( RTSPREQ_RECORD        )
+FLG_ENTRY( RTSPREQ_RECEIVE       )
+#endif
 
 #if LCURL_CURL_VER_GE(7,39,0)
 OPT_ENTRY( pinnedpublickey,    PINNEDPUBLICKEY,    STR, 0,                  LCURL_DEFAULT_VALUE )
@@ -310,6 +341,11 @@ OPT_ENTRY( stream_weight,      STREAM_WEIGHT,      LNG, 0,                  LCUR
 #endif
 #if LCURL_CURL_VER_GE(7,48,0)
 OPT_ENTRY( tftp_no_options,    TFTP_NO_OPTIONS,    LNG, 0,                  LCURL_DEFAULT_VALUE )
+#endif
+
+#if LCURL_CURL_VER_GE(7,49,0)
+OPT_ENTRY( tcp_fastopen,       TCP_FASTOPEN,       LNG, 0,                  LCURL_DEFAULT_VALUE )
+OPT_ENTRY( connect_to,         CONNECT_TO,         LST, 0,                  LCURL_DEFAULT_VALUE )
 #endif
 
 #ifdef OPT_ENTRY_IS_NULL

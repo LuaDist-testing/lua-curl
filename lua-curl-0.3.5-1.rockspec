@@ -1,10 +1,18 @@
-package = "Lua-cURL"
-version = "scm-0"
+-- This file was automatically generated for the LuaDist project.
 
+package = "lua-curl"
+version = "0.3.5-1"
+
+-- LuaDist source
 source = {
-  url = "https://github.com/Lua-cURL/Lua-cURLv3/archive/master.zip",
-  dir = "Lua-cURLv3-master",
+  tag = "0.3.5-1",
+  url = "git://github.com/LuaDist-testing/lua-curl.git"
 }
+-- Original source
+-- source = {
+--   url = "https://github.com/Lua-cURL/Lua-cURLv3/archive/v0.3.5.zip",
+--   dir = "Lua-cURLv3-0.3.5",
+-- }
 
 description = {
   summary = "Lua binding to libcurl",
@@ -70,5 +78,4 @@ build = {
     },
   }
 }
-
 

@@ -7,7 +7,7 @@ shallow_clone: true
 
 environment:
   LUAROCKS_VER: 2.2.1
-  CURL_VER: 7.48.0
+  CURL_VER: 7.50.1
 
   matrix:
     - LUA_VER: 5.1.5
@@ -56,6 +56,8 @@ test_script:
   - cd %APPVEYOR_BUILD_FOLDER%\test
   - lua run.lua
   - lua test_pause02.c.lua
+  - lua test_multi_callback.lua
+  - lua test_multi_nested_callback.lua
 
 after_test:
   - cd %APPVEYOR_BUILD_FOLDER%
